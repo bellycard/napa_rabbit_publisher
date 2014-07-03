@@ -31,7 +31,7 @@ routing_key = 'meme_quotes'
 amqp.exchange.publish(data.to_json, routing_key: routing_key, content_type: 'application/json')
 ```
 
-There is also an ActiveRecord module that will broadcast changes to models automatically (using the after_save hook)
+There is also an ActiveRecord module that will broadcast changes to models automatically (using the after_create and after_update hooks)
 
 ```
 class User < ActiveRecord::Base
