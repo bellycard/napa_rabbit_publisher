@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = NapaRabbitPublisher::VERSION
   spec.authors       = ["Jay OConnor"]
   spec.email         = ["jay@bellycard.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{This provides an easy to use library with an AMQP Singleton for connecting and sending data to RabbitMQ}
+  spec.summary       = %q{This provides an easy to use library with an AMQP Singleton for connecting and sending data to RabbitMQ}
   spec.homepage      = ""
   spec.license       = "MIT"
 
