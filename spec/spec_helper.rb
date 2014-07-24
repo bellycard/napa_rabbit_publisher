@@ -9,6 +9,9 @@ RSpec.configure do |config|
       create_table :foos do |t|
         t.string :word
       end
+      create_table :bars do |t|
+        t.string :name
+      end
     end
 
     class Foo < ActiveRecord::Base
