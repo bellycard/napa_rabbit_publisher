@@ -14,7 +14,12 @@ module NapaRabbitPublisher
     def post_to_rabbit(key)
       # broadcast to rabbit
       amqp = NapaRabbitPublisher::AMQPSingleton.instance
-      data = respond_to?(:amqp_properties) ? amqp_properties : self
+      data = {}
+      begin
+        data = "#{self.class.name}Representer".constantize.new(self)
+      rescue NameError => e
+        data = respond_to?(:amqp_properties) ? amqp_properties : self
+      end
       # routing_key = <singular model name>_<past tense action>
       routing_key = "#{self.class.name.underscore}_#{key}"
       amqp.exchange.publish(data.to_json, routing_key: routing_key, content_type: 'application/json')
