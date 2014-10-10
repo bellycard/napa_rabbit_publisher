@@ -25,11 +25,12 @@ define the following variables in your ENV
 ENV['SERVICE_NAME'] defines the topic exchange that you will be sending messages through.
 
 ```
-amqp = NapaRabbitPublisher::AMQPSingleton.instance
-data = {i: :like_turtles}
-routing_key = 'meme_quotes'
-amqp.exchange.publish(data.to_json, routing_key: routing_key, content_type: 'application/json')
+data = { foo: 'bar' }
+routing_key = 'foo_created'
+NapaRabbitPublisher.publish(data, routing_key)
 ```
+
+It is assumed that the data argument will be a hash, or something that responds to `.to_json`, and will be broadcast as `content_type: 'application/json'` onto the exchange.
 
 There is also an ActiveRecord module that will broadcast changes to models automatically (using the after_create and after_update hooks)
 
