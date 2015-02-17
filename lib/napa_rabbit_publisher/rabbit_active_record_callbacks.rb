@@ -1,14 +1,16 @@
 module NapaRabbitPublisher
   module RabbitActiveRecordCallbacks
     def self.included(base)
-      base.class_eval do
-        after_create do
-          post_to_rabbit('created')
-        end
-        after_update do
-          post_to_rabbit('updated')
-        end
-      end
+      base.after_commit :post_create_to_rabbit, on: :create
+      base.after_commit :post_update_to_rabbit, on: :update
+    end
+
+    def post_create_to_rabbit
+      post_to_rabbit('created')
+    end
+
+    def post_update_to_rabbit
+      post_to_rabbit('updated')
     end
 
     def post_to_rabbit(key)
