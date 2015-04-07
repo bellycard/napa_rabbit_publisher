@@ -8,24 +8,33 @@ describe NapaRabbitPublisher::RabbitActiveRecordCallbacks do
   end
   ENV['SERVICE_NAME'] = 'test'
 
-  context 'when included in an AR model' do
-    context 'when creating a record' do
-      it 'broadcasts a message' do
+  context "when included in an AR model" do
+    context "when creating a record" do
+      it "broadcasts a message" do
         expect_any_instance_of(Bunny::Exchange).to receive(:publish)
-        f = Foo.create()
+        Foo.create
       end
 
-      it 'uses the amqp_properties method if found' do
+      it "uses the amqp_properties method if found" do
         expect_any_instance_of(Foo).to receive(:amqp_properties)
-        f = Foo.create()
+        Foo.create
       end
 
     end
-    context 'when updating a record' do
-      it 'broadcasts a message' do
-        f = Foo.create()
+
+    context "when updating a record" do
+      it "broadcasts a message" do
+        f = Foo.create
         expect_any_instance_of(Bunny::Exchange).to receive(:publish)
         f.update_attributes(word: :bar)
+      end
+    end
+
+    context "when deleting a record" do
+      it "broadcasts a message" do
+        f = Foo.create
+        expect_any_instance_of(Bunny::Exchange).to receive(:publish)
+        f.destroy
       end
     end
   end
