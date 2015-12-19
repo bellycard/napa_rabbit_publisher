@@ -18,7 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-define the following variables in your ENV
+Define the following variables in your ENV:
+
 + AMQP_HOST # ex: amqp://localhost:5672
 + SERVICE_NAME # ex: my-awesome-service
 
@@ -32,7 +33,7 @@ NapaRabbitPublisher.publish(data, routing_key)
 
 It is assumed that the data argument will be a hash, or something that responds to `.to_json`, and will be broadcast as `content_type: 'application/json'` onto the exchange.
 
-There is also an ActiveRecord module that will broadcast changes to models automatically (using the after_create and after_update hooks)
+There is also an ActiveRecord module that will broadcast changes to models automatically (using the `after_create`, `after_update`, and `after_destroy` hooks)
 
 ```
 class User < ActiveRecord::Base
