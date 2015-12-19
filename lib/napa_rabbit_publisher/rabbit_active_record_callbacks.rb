@@ -3,6 +3,7 @@ module NapaRabbitPublisher
     def self.included(base)
       base.after_commit :post_create_to_rabbit, on: :create
       base.after_commit :post_update_to_rabbit, on: :update
+      base.after_commit :post_destroy_to_rabbit, on: :destroy
     end
 
     def post_create_to_rabbit
@@ -11,6 +12,10 @@ module NapaRabbitPublisher
 
     def post_update_to_rabbit
       post_to_rabbit('updated')
+    end
+
+    def post_destroy_to_rabbit
+      post_to_rabbit('destroy')
     end
 
     def post_to_rabbit(key)

@@ -21,11 +21,20 @@ describe NapaRabbitPublisher::RabbitActiveRecordCallbacks do
       end
 
     end
+
     context 'when updating a record' do
       it 'broadcasts a message' do
         f = Foo.create()
         expect_any_instance_of(Bunny::Exchange).to receive(:publish)
         f.update_attributes(word: :bar)
+      end
+    end
+
+    context 'when destroying a record' do
+      it 'broadcasts a message' do
+        f = Foo.create()
+        expect_any_instance_of(Bunny::Exchange).to receive(:publish)
+        f.destroy()
       end
     end
   end
