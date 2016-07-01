@@ -6,7 +6,7 @@ This provides an easy to use library with an AMQP Singleton for connecting and s
 
 Add this line to your application's Gemfile:
 
-    gem 'napa_rabbit_publisher'
+    gem 'napa_rabbit_publisher', github: 'bellycard/napa_rabbit_publisher'
 
 And then execute:
 
