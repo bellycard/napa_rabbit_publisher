@@ -8,7 +8,7 @@ module NapaRabbitPublisher
       @connection = Bunny.new(ENV['CLOUDAMQP_URL'] || ENV['AMQP_HOST'])
       @connection.start
       @channel = connection.create_channel
-      @exchange = channel.topic(ENV['SERVICE_NAME'])
+      @exchange = channel.topic(ENV['AMQP_EXCHANGE'] || ENV['SERVICE_NAME'])
     end
   end
 end
